@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de Usuário";
+}
+
+<script>
+    function CadUser() {
+        var email = document.getElementById("email").value;
+        var email2 = document.getElementById("email2").value;
+        var senha = document.getElementById("senha").value;
+        var senha2 = document.getElementById("senha2").value;
+        var ok1 = 'False';
+        var ok2 = 'False';
+        var alerta = "";
+
+
+        if (email == "") {
+            alerta = '<div class="alert alert-warning" role="alert">Insira um email!</div >';
+        } else {
+                if (email == email2) {
+                    ok1 = 'True'
+                } else {
+                    alerta = '<div class="alert alert-warning" role="alert">Emails diferentes!</div >';
+                }
+            
+        }
+
+        if (senha == "") {
+                alerta = alerta + '<div class="alert alert-warning" role="alert">Insira uma senha!</div >';
+        } else {
+            if (senha.length < 6) {
+                alerta = alerta + '<div class="alert alert-warning" role="alert">Insira uma senha com pelo menos 6 caracteres!</div >';
+            } else {
+                if (senha == senha2) {
+                    ok2 = 'True'
+                } else {
+                    alerta = alerta + '<div class="alert alert-warning" role="alert">Senhas diferentes!</div >';
+                }
+            }
+        }
+
+
+        if (ok1 == 'True' && ok2 == 'True') {
+            document.getElementById("formulario").submit();
+        } else {
+            document.getElementById("alert").innerHTML = alerta;
+        }
+    }
+</script>
+
+<div class="text-center">
+    <br>
+    <div id="alert"> </div>
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p></p>
+    <form id="formulario" action="/cadastroUser" method="post">
+        <div>
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" style="width:50%"></input>
+        </div>
+        <div>
+            <label for="email2">Confirme seu E-mail:</label><br>
+            <input type="email" id="email2" style="width:50%"></input>
+        </div>
+        <div>
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" style="width:50%"></input>
+        </div>
+
+        <div>
+            <label for="senhas">Confirme sua Senha:</label><br>
+            <input type="password" id="senha2" style="width:50%"></input>
+        </div>
+        <br>
+
+    </form>
+    <div class="button">
+        <button type="submit" class="btn btn-primary" style="width:30%" onclick="CadUser()">Enviar</button>
+    </div>
+    <br />
+     Insira uma senha com pelo menos 6 caracteres.
+</div>
